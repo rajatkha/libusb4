@@ -19,3 +19,7 @@ Total paths: 12
 
 As you can see, total paths are printed (no of hop IDs). This value is present in bits [10:0] of host interface capabilities register
 
+To give it a more glare, I have made some functions in nhi_vfio_enumerate.cc - read_word, read_64word, write_word, write_64word, read_config_byte, write_config_byte, read_config_dword, write_config_dword
+
+These functions are helper functions to read/write PCIe config space and host interface memory. 
+
