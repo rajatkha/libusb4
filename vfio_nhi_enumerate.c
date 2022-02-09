@@ -308,36 +308,42 @@ struct tb_nhi *nhi_vfio_map_mem(char* nhi_dev, int iommu_grp)
     	return nhi;
 }
 
+/* read a 32 bit data from host interface memory */
 void read_word(void *buff, u64 offset) {
 	ssize_t ret = pread(device, buff, 4, bar_offset + offset);
 	if(ret==-1)
                 printf("reading from bar space offset %ld failed\n", offset);
 }
 
+/* read a 64 bit data from host interface memory */
 void read_64word(void *buff, u64 offset) {
 	ssize_t ret = pread(device, buff, 8, bar_offset + offset);
         if(ret==-1)
                 printf("reading from bar space offset %ld failed\n", offset);
 }
 
+/* write a 32 bit data to host interface memory */
 void write_word(void *buff, u64 offset) {
 	ssize_t ret = pwrite(device, buff, 4, bar_offset + offset);
 	if(ret==-1)
 		printf("writing to bar space offset %ld failed\n", offset);
 }
 
+/* write a 64 bit data to host interface memory */
 void write_64word(void *buff, u64 offset) {
 	ssize_t ret = pwrite(device, buff, 8, bar_offset + offset);
         if(ret==-1)
                 printf("writing to bar space offset %ld failed\n", offset);
 }
 
+/* read a byte from PCIe config space */
 void read_config_byte(void *buff, u64 offset) {
 	ssize_t ret = pread(device, buff, 1, config_offset + offset);
 	if(ret==-1)
 		printf("reading from config space offset %ld failed\n", offset);
 }
 
+/* write a byte to PCIe config space */
 void write_config_byte(struct tb_nhi *nhi, u8 val, u64 offset) {
         char path[1024];
         snprintf(path, sizeof(path), "setpci -s %s %x.B=%x", nhi->nhi_dev, offset, val);
@@ -345,12 +351,14 @@ void write_config_byte(struct tb_nhi *nhi, u8 val, u64 offset) {
                 printf("writing to config space offset %ld failed\n", offset);
 }
 
+/* read a 32 bit data from PCIe config space */
 void read_config_dword(void *buff, u64 offset) {
 	ssize_t ret = pread(device, buff, 4, config_offset + offset);
 	if(ret==-1)
 		printf("reading from config space offset %ld failed\n", offset);
 }
 
+/* write a 32 bit data to PCIe config space */
 void write_config_dword(struct tb_nhi *nhi, u32 val, u64 offset) {
 	char path[1024];
 	snprintf(path, sizeof(path), "setpci -s %s %x.L=%x", nhi->nhi_dev, offset, val);
