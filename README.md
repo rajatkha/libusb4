@@ -15,25 +15,7 @@ Compile the code: gcc nhi.c vfio_nhi_enumerate.c -I/home/rajatkha/pciutils/lib -
 Run the binary: sudo ./a.out
 
 The following output should be displayed:
-pre-SET_CONTAINER:
-VFIO_CHECK_EXTENSION VFIO_TYPE1_IOMMU: Present
-post-SET_CONTAINER:
-VFIO_CHECK_EXTENSION VFIO_TYPE1_IOMMU: Present
-Device supports 9 regions, 5 irqs
-Info for region 0
-size 0x40000, offset 0x0, flags 0x7
-Info for region 7
-size 0x1000, offset 0x70000000000, flags 0x3
-Info for MSIX IRQ
-flags 0x9, count 0x10
-Info for MSI IRQ
-flags 0x9, count 0x1
-Info for normal IRQ
-flags 0x7, count 0x1
-Info for IOMMU
-flags 0x3, page_sizes 0xfffffffffffff000
-PCI Device:0000:03:00.0
 Total paths: 12
 
-As you can see, total paths are printed (no of hop IDs)
+As you can see, total paths are printed (no of hop IDs). This value is present in bits [10:0] of host interface capabilities register
 
