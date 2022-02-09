@@ -8,6 +8,8 @@ After cloning the above repo, you need to compile it so run make.
 
 Now, check your PCI tree and see which ID represents NHI controller. In my system it is 0000:03:00.0
 
+Now, fetch the vendor and device ID by this command: lspci -n -s 0000:03:00.0
+
 Bind the vfio-pci driver: sudo sh -c "echo 8086 15e8 > /sys/bus/pci/drivers/vfio-pci/new_id"
 
 Compile the code: gcc nhi.c vfio_nhi_enumerate.c -I/home/rajatkha/pciutils/lib -lpci
